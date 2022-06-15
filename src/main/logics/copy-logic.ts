@@ -3,22 +3,22 @@ const { existsSync } = require('fs');
 const { fork } = require('child_process');
 const config = require('../config');
 const { resolve } = require('path');
-const event = require('../event');
+const customEvent = require('../event');
 const { getExistDist } = require('./dist-change-logic');
 
-let childs = [];
+let childs: any[] = [];
 
-let dists = [];
+let dists: any[] = [];
 
 const liseners = [];
 
 const childCount = 1;
 
-let win = null;
+let win: any = null;
 
-let lastDist = null;
+let lastDist: any = null;
 
-function emit (data) {
+function emit (data: any) {
   console.log('emit', data)
   if (!win) return console.log('no win');
 
@@ -26,11 +26,11 @@ function emit (data) {
 }
 
 
-event.on('DistChange', data => {
+customEvent.on('DistChange', (data: any) => {
   dists = data;
 });
 
-function updateChilds(path) {
+function updateChilds(path: string) {
   childs = childs.filter(ele => !ele.__end__);
   
   if (childs.length < childCount) {
@@ -41,7 +41,7 @@ function updateChilds(path) {
   }
 }
 
-function startCopy(path, dist) {
+function startCopy(path: any, dist: any) {
   console.log('startCopy', path, dist)
   if (!dist) return;
 
@@ -51,7 +51,7 @@ function startCopy(path, dist) {
 
   emit({ type: 'start', dist });
   const child = fork(resolve(__dirname, 'copy.js'), [path, `${dist}:\/`]);
-  child.on('message', ({ action }) => {
+  child.on('message', ({ action }: { action: any }) => {
     console.log(action, 'action');
     if (action === 'success') {
       emit({ type: 'success', dist });
@@ -74,7 +74,7 @@ function startCopy(path, dist) {
   childs.push(child);
 }
 
-function copy(e, path) {
+function copy(e: any, path: any) {
   console.log('entry copy');
   if (existsSync(path)) {
     if (config.targetPath !== path) config.update('targetPath', path);
@@ -91,7 +91,7 @@ function copy(e, path) {
 
 }
 
-function initCopyEvents (_win) {
+function initCopyEvents (_win: any) {
   if (!dists.length) dists = getExistDist();
   ipcMain.handle('copy:start', copy);
   win = _win;
@@ -99,7 +99,7 @@ function initCopyEvents (_win) {
 
 module.exports.initCopyEvents = initCopyEvents;
 
-module.exports.onCopyStateChange = (cb) => {
+module.exports.onCopyStateChange = (cb: any) => {
   console.log('add cb')
   if (typeof cb !== 'function') return;
   liseners.push(cb);
