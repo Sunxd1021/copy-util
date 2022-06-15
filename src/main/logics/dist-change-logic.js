@@ -14,7 +14,7 @@ function getExistDist() {
     if (existsSync(`${dist}:\/`)) {
       list.push({ name: dist });
     } else {
-      break;
+      // break;
     }
   }
 
