@@ -14,6 +14,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { initCopyEvents } from './logics/copy-logic';
 
 export default class AppUpdater {
   constructor() {
@@ -106,6 +107,8 @@ const createWindow = async () => {
     shell.openExternal(edata.url);
     return { action: 'deny' };
   });
+
+  initCopyEvents(mainWindow);
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
