@@ -1,0 +1,28 @@
+.custom-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.custom-button:active {
+  opacity: 0.5;
+}
+
+.custom-button_normal {
+  font-size: 14px;
+  height: 30px;
+  padding: 0 20px;
+  min-width: 70px;
+  border-radius: 4px;
+}
+
+.custom-button_small {
+  font-size: 10px;
+  height: 20px;
+  padding: 0 15px;
+  min-width: 50px;
+  border-radius: 2px;
+}

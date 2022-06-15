@@ -1,0 +1,18 @@
+.dist-info {
+  font-size: 12px;
+  width: fit-content;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.dist-info > div + div {
+  margin-top: 5px;
+}
+
+.dist_avatar > .icon {
+  color: orange;
+}

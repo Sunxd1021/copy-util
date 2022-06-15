@@ -1,0 +1,19 @@
+.target-path {
+  font-size: 12px;
+  margin-bottom: 15px;
+  line-height: 25px;
+}
+
+.target-path > input {
+  outline: none;
+  border: 1px solid #ccc;
+  height: 25px;
+  font-size: 12px;
+  border-radius: 4px;
+  padding-left: 4px;
+  min-width: 300px;
+}
+
+.target-path > span {
+  padding-left: 5px;
+}

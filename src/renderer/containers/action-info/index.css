@@ -1,0 +1,7 @@
+.action-container {
+  display: flex;
+}
+
+.action-container > .custom-button + .custom-button {
+  margin-left: 10px;
+}
