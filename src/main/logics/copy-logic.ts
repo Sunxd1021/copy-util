@@ -1,4 +1,5 @@
-const { ipcMain } = require('electron');
+// const { ipcMain } = require('electron');
+import { ipcMain } from "electron";
 const { existsSync } = require('fs');
 const { fork } = require('child_process');
 const config = require('../config');
@@ -10,7 +11,7 @@ let childs: any[] = [];
 
 let dists: any[] = [];
 
-const liseners = [];
+// const liseners = [];
 
 const childCount = 1;
 
@@ -50,7 +51,10 @@ function startCopy(path: any, dist: any) {
   lastDist = dist;
 
   emit({ type: 'start', dist });
-  const child = fork(resolve(__dirname, 'copy.js'), [path, `${dist}:\/`]);
+  const child = fork(resolve(__dirname, 'copy.ts'), [path, `${dist}:\/`], {
+    // 指定子进程使用ts-node
+    execArgv: ['.\\node_modules\\ts-node\\dist\\bin.js']
+  });
   child.on('message', ({ action }: { action: any }) => {
     console.log(action, 'action');
     if (action === 'success') {
@@ -102,5 +106,5 @@ module.exports.initCopyEvents = initCopyEvents;
 module.exports.onCopyStateChange = (cb: any) => {
   console.log('add cb')
   if (typeof cb !== 'function') return;
-  liseners.push(cb);
+  // liseners.push(cb);
 }

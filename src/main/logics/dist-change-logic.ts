@@ -1,6 +1,7 @@
-const { usb, getDeviceList } = require('usb');
+const { usb } = require('usb');
 const { existsSync } = require('fs');
-const event = require('../event');
+// const event = require('../event');
+import event from "../event";
 const { ipcMain } = require('electron');
 // u盘插拔事件
 const liseners = [];
@@ -31,7 +32,7 @@ usb.on('attach', emitLisener);
 
 usb.on('detach', emitLisener);
 
-function onDistChange(cb) {
+function onDistChange(cb: any) {
   if (typeof cb !== 'function') return;
   if (!liseners.length) {
     cb(getExistDist())
