@@ -7,7 +7,7 @@ const ActionInfo = ({ onStartCopy }: { onStartCopy: () => void }) => {
   return (
     <MainContainer  name='操作' cls='action-container'>
       <Button txt='开始拷贝' onClick={onStartCopy} size='normal' />
-      <Button txt='取消拷贝' onClick={() => {}} size='normal' />
+      {/* <Button txt='取消拷贝' onClick={() => {}} size='normal' /> */}
     </MainContainer>
   )
 }
