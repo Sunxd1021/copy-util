@@ -47,10 +47,11 @@ function updateChilds(path: string) {
     const index = dists.findIndex(ele => ele.name === lastDist);
     if (index === -1) return;
 
-    const next: string = dists[index+1];
+    const next = dists[index+1];
     if (next) {
-      if (config.ignoreDist.includes(next)) {
-        lastDist = next;
+      const { name } = next;
+      if (config.ignoreDist.includes(name)) {
+        lastDist = name;
         updateChilds(path);
       } else {
         startCopy(path, dists[index+1])
