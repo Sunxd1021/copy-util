@@ -183,8 +183,8 @@
     "webpack-merge": "^5.8.0"
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "Copy Tool",
+    "appId": "org.erb.CopyTool",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
