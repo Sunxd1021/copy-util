@@ -2,7 +2,6 @@ import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 const config = require('./config');
 
 export type Channels = 'ipc-example';
-// const key: string;
 interface S {
   [key: string]: any
 }
@@ -32,7 +31,6 @@ const data: S = {
   getTargetPath: () => config.targetPath,
   onCopyStateChange: (cb: () => void) => {
     if (typeof cb !== 'function') return;
-    // if )
     ipcRenderer.on('copy:state-change', cb);
   },
 }
