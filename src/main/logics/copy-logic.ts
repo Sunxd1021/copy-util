@@ -6,12 +6,13 @@ import { resolve } from "path";
 import customEvent from '../event';
 import { getExistDist } from './dist-change-logic';
 import messageToWeb from '../message-to-web';
+import { cpus } from 'os';
 
 let childs: any[] = [];
 
 let dists: any[] = [];
 
-const childCount = 1;
+const childCount = cpus().length || 4;
 
 let win: any = null;
 
@@ -47,7 +48,15 @@ function updateChilds(path: string) {
     const index = dists.findIndex(ele => ele.name === lastDist);
     if (index === -1) return;
 
-    if (dists[index+1]) startCopy(path, dists[index+1])
+    const next: string = dists[index+1];
+    if (next) {
+      if (config.ignoreDist.includes(next)) {
+        lastDist = next;
+        updateChilds(path);
+      } else {
+        startCopy(path, dists[index+1])
+      }
+    }
   }
 }
 
@@ -87,13 +96,13 @@ function startCopy(path: any, dist: any) {
 }
 
 function copy(_e: any, path: any) {
-  console.log('entry copy');
   if (existsSync(path)) {
     if (config.targetPath !== path) config.update('targetPath', path);
     let i = 0;
-    while(i < childCount) {
-      console.log('entry while')
-      startCopy(path, dists[i]);
+    while(childs.length < childCount && dists[i]) {
+      if (!config.ignoreDist.includes(dists[i])) {
+        startCopy(path, dists[i]);
+      }
       i++;
     }
     return { message: '开始复制' }
