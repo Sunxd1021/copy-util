@@ -2,11 +2,11 @@
   font-size: 12px;
   width: fit-content;
   padding: 10px;
-
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
+  align-content: baseline;
 }
 
 .dist-info > div + div {
