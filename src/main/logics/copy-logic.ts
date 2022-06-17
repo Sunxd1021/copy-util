@@ -28,6 +28,17 @@ customEvent.on('DistChange', (data: any) => {
   dists = data;
 });
 
+function getChildOptions () {
+  const isProd: boolean = process.env.NODE_ENV === 'production';
+  const childPath: string = resolve(__dirname, `copy.${isProd ? 'js' : 'ts'}`);
+  const childOptions: { execArgv?: any } =  isProd ? {} : {
+    // 开发环境使用ts node接续子进程
+    execArgv: ['.\\node_modules\\ts-node\\dist\\bin.js']
+  };
+
+  return { childPath, childOptions };
+}
+
 function updateChilds(path: string) {
   childs = childs.filter(ele => !ele.__end__);
   
@@ -48,10 +59,9 @@ function startCopy(path: any, dist: any) {
   lastDist = dist;
 
   emit({ type: 'start', dist });
-  const child: any = fork(resolve(__dirname, 'copy.ts'), [path, `${dist}:\/`], {
-    // 指定子进程使用ts-node
-    execArgv: ['.\\node_modules\\ts-node\\dist\\bin.js']
-  });
+
+  const { childPath, childOptions } = getChildOptions();
+  const child: any = fork(childPath, [path, `${dist}:\/`], childOptions);
   child.on('message', ({ action }: { action: any }) => {
     console.log(action, 'action');
     if (action === 'success') {
