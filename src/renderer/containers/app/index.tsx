@@ -46,8 +46,10 @@ const App = () => {
   return (
     <div className="app">
       <DistInfoList distInfos={distInfos} />
-      <TargetFileInfo onPathChange = {onPathChange} />
-      <ActionInfo onStartCopy = { onStartopy } />
+      <div className="footer">
+        <TargetFileInfo onPathChange = {onPathChange} />
+        <ActionInfo onStartCopy = { onStartopy } />
+      </div>
     </div>
   )
 }

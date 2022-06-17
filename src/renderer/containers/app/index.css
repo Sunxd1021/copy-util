@@ -1,8 +1,14 @@
+#root {
+  height: 100%;
+}
+
 .app {
   width: 100%;
   height: 100%;
   padding: 5%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   display: flex;
   flex-direction: column;
 }
@@ -15,6 +21,15 @@ body {
   height: 100vh;
 }
 
-.main-container + .main-container {
+.app > .main-container {
+  flex: 1;
+}
+
+.footer > .main-container + .main-container {
+  margin-left: 20px;
+}
+
+.footer {
   margin-top: 40px;
+  display: flex;
 }
