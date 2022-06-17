@@ -6,6 +6,7 @@ class Config {
     this.data = require('./config.json');
     this.writing = false;
     this.hasCache = false;
+    this.targetPath = undefined;
   }
 
   update = (key, value) => {

@@ -1,6 +1,5 @@
 const { usb } = require('usb');
 const { existsSync } = require('fs');
-// const event = require('../event');
 import event from "../event";
 const { ipcMain } = require('electron');
 // u盘插拔事件
@@ -47,4 +46,4 @@ module.exports.onDistChange = onDistChange;
 
 module.exports.emitLisener = emitLisener;
 
-module.exports.getExistDist = getExistDist;
+export { getExistDist }

@@ -1,17 +1,14 @@
-// const { ipcMain } = require('electron');
 import { ipcMain } from "electron";
-const { existsSync } = require('fs');
-const { fork } = require('child_process');
-const config = require('../config');
-const { resolve } = require('path');
-const customEvent = require('../event');
-const { getExistDist } = require('./dist-change-logic');
+import { existsSync } from 'fs-extra';
+import { fork } from "child_process";
+import config from "../config";
+import { resolve } from "path";
+import customEvent from '../event';
+import { getExistDist } from './dist-change-logic';
 
 let childs: any[] = [];
 
 let dists: any[] = [];
-
-// const liseners = [];
 
 const childCount = 1;
 
@@ -51,7 +48,7 @@ function startCopy(path: any, dist: any) {
   lastDist = dist;
 
   emit({ type: 'start', dist });
-  const child = fork(resolve(__dirname, 'copy.ts'), [path, `${dist}:\/`], {
+  const child: any = fork(resolve(__dirname, 'copy.ts'), [path, `${dist}:\/`], {
     // 指定子进程使用ts-node
     execArgv: ['.\\node_modules\\ts-node\\dist\\bin.js']
   });
