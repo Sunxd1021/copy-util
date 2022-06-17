@@ -2,9 +2,6 @@ const fs = require('fs-extra');
 
 const exit = () => process.exit();
 
-// const send = (data: any) => {
-//   if (typeof process.send === 'function') process.send(data);
-// }
 let send: (data: any) => void
 
 send = data => {
@@ -12,7 +9,6 @@ send = data => {
 }
 
 const copy = (target: string, dir: string) => {
-  console.log(target, dir)
   fs.copy(target, dir).then(() => {
     send({ action: 'success' });
     exit();
