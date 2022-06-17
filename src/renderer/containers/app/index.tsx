@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import DistInfoList from "../dist-list";
 import TargetFileInfo from "../target-info";
 import ActionInfo from "../action-info";
-// import electron from "../../utils/electron";
 
 import './index.css';
 
@@ -13,14 +12,6 @@ interface Dist {
 }
 
 const App = () => {
-  // const [distInfos, setDistInfos] = useState([
-  //   { name: 'C', useAble: true },
-  //   { name: 'D', useAble: true },
-  //   { name: 'E', useAble: true },
-  //   { name: 'F', useAble: true },
-  //   { name: 'G', useAble: true },
-  //   { name: 'H', useAble: true },
-  // ]);
   const [distInfos, setDistInfos] = useState<Array<Dist>>([]);
 
   const path = useRef('');
