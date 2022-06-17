@@ -98,7 +98,7 @@ function copy(_e: any, path: any) {
     if (config.targetPath !== path) config.update('targetPath', path);
     let i = 0;
     while(childs.length < childCount && dists[i]) {
-      if (!config.ignoreDist.includes(dists[i])) {
+      if (!config.ignoreDist.includes(dists[i].name)) {
         startCopy(path, dists[i]);
       }
       i++;
