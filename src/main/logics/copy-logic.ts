@@ -1,10 +1,11 @@
-import { ipcMain } from "electron";
+import { ipcMain, IpcMainInvokeEvent } from "electron";
 import { existsSync } from 'fs-extra';
 import { fork } from "child_process";
 import config from "../config";
 import { resolve } from "path";
 import customEvent from '../event';
 import { getExistDist } from './dist-change-logic';
+import messageToWeb from '../message-to-web';
 
 let childs: any[] = [];
 
@@ -100,11 +101,22 @@ function copy(_e: any, path: any) {
     console.log('目标目录不存在', path);
     return { message: '目标目录不存在' }
   }
+}
 
+const onStateChange = (_event: IpcMainInvokeEvent, dist: string) => {
+  const list = config.ignoreDist;
+  if (list.includes(dist)) {
+    config.update('ignoreDist', list.filter(ele => ele !== dist));
+  } else {
+    config.update('ignoreDist', [...list, dist]);
+  }
+
+  messageToWeb.send({ key: 'dist:change', data: getExistDist() });
 }
 
 export const initCopyEvents = (_win: any) => {
   if (!dists.length) dists = getExistDist();
   ipcMain.handle('copy:start', copy);
+  ipcMain.handle('dist:stateChange', onStateChange);
   win = _win;
 }
