@@ -15,6 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { initCopyEvents } from './logics/copy-logic';
+import messageToWeb from './message-to-web';
 
 export default class AppUpdater {
   constructor() {
@@ -109,6 +110,8 @@ const createWindow = async () => {
   });
 
   initCopyEvents(mainWindow);
+
+  messageToWeb.init(mainWindow);
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
