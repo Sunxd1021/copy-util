@@ -7,6 +7,7 @@ class Config {
     this.writing = false;
     this.hasCache = false;
     this.targetPath = undefined;
+    this.ignoreDist = []
   }
 
   update = (key, value) => {
