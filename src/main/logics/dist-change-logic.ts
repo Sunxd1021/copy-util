@@ -3,7 +3,6 @@ const { existsSync } = require('fs');
 import event from "../event";
 const { ipcMain } = require('electron');
 // u盘插拔事件
-const liseners = [];
 
 const files = ['C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
 
@@ -31,19 +30,6 @@ usb.on('attach', emitLisener);
 
 usb.on('detach', emitLisener);
 
-function onDistChange(cb: any) {
-  if (typeof cb !== 'function') return;
-  if (!liseners.length) {
-    cb(getExistDist())
-  }
-  liseners.push(cb);
-}
-
 ipcMain.handle('dist:init', getExistDist)
-
-
-module.exports.onDistChange = onDistChange;
-
-module.exports.emitLisener = emitLisener;
 
 export { getExistDist }
