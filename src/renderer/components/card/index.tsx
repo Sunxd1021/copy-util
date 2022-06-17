@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Button from '../button';
 
 import './index.css';
@@ -9,13 +9,24 @@ const map: Record<string, string> = {
   fail: '复制失败'
 };
 
-const DistInfo = (props: { state: string; name: string }) => {
+interface PropsInterface {
+  state: string;
+  name: string;
+  ignore: boolean;
+  onIgnore: (name: string) => void;
+}
+
+const DistInfo = (props: PropsInterface) => {
   const process = useMemo(() => {
     
     console.log('state', props.state);
     const state: string = props.state;
     return map[state] || '未开始';
   }, [props.state]);
+
+  const _onIgnore = useCallback(() => {
+    props.onIgnore(props.name);
+  }, [props.name]);
 
   return (
     <div className='dist-info'>
@@ -24,7 +35,7 @@ const DistInfo = (props: { state: string; name: string }) => {
         <span className='dist_name'>磁盘{props.name}</span>
       </div>
       <div>复制进度：{process}</div>
-      <Button txt='忽略该磁盘' size='small' onClick={() => {}} />
+      <Button txt={ props.ignore ? '取消忽略' : '忽略磁盘' } size='small' onClick={_onIgnore} />
     </div>
   );
 }
