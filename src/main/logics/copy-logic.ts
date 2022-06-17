@@ -78,7 +78,7 @@ function startCopy(path: any, dist: any) {
   childs.push(child);
 }
 
-function copy(e: any, path: any) {
+function copy(_e: any, path: any) {
   console.log('entry copy');
   if (existsSync(path)) {
     if (config.targetPath !== path) config.update('targetPath', path);
@@ -88,6 +88,7 @@ function copy(e: any, path: any) {
       startCopy(path, dists[i]);
       i++;
     }
+    return { message: '开始复制' }
   } else {
     console.log('目标目录不存在', path);
     return { message: '目标目录不存在' }
@@ -95,16 +96,8 @@ function copy(e: any, path: any) {
 
 }
 
-function initCopyEvents (_win: any) {
+export const initCopyEvents = (_win: any) => {
   if (!dists.length) dists = getExistDist();
   ipcMain.handle('copy:start', copy);
   win = _win;
-}
-
-module.exports.initCopyEvents = initCopyEvents;
-
-module.exports.onCopyStateChange = (cb: any) => {
-  console.log('add cb')
-  if (typeof cb !== 'function') return;
-  // liseners.push(cb);
 }
