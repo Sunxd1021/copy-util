@@ -17,6 +17,7 @@ declare global {
       };
       getTargetPath: () => string;
       startCopy: (path: string) => void;
+      toggleDistState: (distName: string) => void;
       onDistChange: (fn: (event: any, data: any) => void) => void;
       onCopyStateChange: (fn: (event: any, data: any) => void) => void;
       getInitDist: PromiseInterface

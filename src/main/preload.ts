@@ -23,6 +23,7 @@ const data: S = {
     },
   },
   startCopy: (path: string) => ipcRenderer.invoke('copy:start', path),
+  toggleDistState: (dist: string) => ipcRenderer.invoke('dist:stateChange', dist),
   getInitDist: () => ipcRenderer.invoke('dist:init'),
   onDistChange: (cb: () => any) => {
     if (typeof cb !== 'function') return;
