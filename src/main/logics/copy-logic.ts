@@ -19,7 +19,6 @@ let win: any = null;
 let lastDist: any = null;
 
 function emit (data: any) {
-  console.log('emit', data)
   if (!win) return console.log('no win');
 
   win.webContents.send('copy:state-change', data)
@@ -73,12 +72,11 @@ function startCopy(path: any, dist: any) {
   const { childPath, childOptions } = getChildOptions();
   const child: any = fork(childPath, [path, `${dist}:\/`], childOptions);
   child.on('message', ({ action }: { action: any }) => {
-    console.log(action, 'action');
     if (action === 'success') {
       emit({ type: 'success', dist });
-      console.log('copy success');
+      console.log('copy success ', dist);
     } else if (action === 'fail') {
-      console.log('copy fail');
+      console.log('copy fail ', dist);
       emit({ type: 'fail', dist });
     }
   });

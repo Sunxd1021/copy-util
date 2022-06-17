@@ -3,6 +3,6 @@
   "targetPath1": "test",
   "ignoreDist": [
     "C",
-    "E"
+    "D"
   ]
 }
