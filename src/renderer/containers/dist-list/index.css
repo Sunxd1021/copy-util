@@ -3,3 +3,7 @@
   flex-wrap: wrap;
   flex: 1;
 }
+
+.dist-container > .dist-info {
+  margin: 5px;
+}

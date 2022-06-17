@@ -23,6 +23,7 @@ body {
 
 .app > .main-container {
   flex: 1;
+  align-content: baseline;
 }
 
 .footer > .main-container + .main-container {
