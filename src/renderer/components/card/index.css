@@ -8,6 +8,7 @@
   align-items: center;
   border-radius: 4px;
   min-width: 110px;
+  border: 1px solid transparent;
 }
 
 .dist-info > div + div {
@@ -21,4 +22,8 @@
 .ignore {
   background-color: rgba(0, 0, 0, 0.1);
   opacity: .3;
+}
+
+.unexist {
+  border: 1px solid orangered;
 }

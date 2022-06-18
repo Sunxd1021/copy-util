@@ -17,7 +17,6 @@ class DistInfo extends Base {
   onIgnoreStateChange = (_: any, name: string) => {
     const result = config.toggle(name);
     config.update();
-    console.log(name, result === 1);
     this.updateDistInfo(name, 'ignore', result === 1)
   }
 }
