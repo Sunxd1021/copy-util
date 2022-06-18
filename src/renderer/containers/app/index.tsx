@@ -3,16 +3,12 @@ import React, { useState, useRef, useEffect } from "react";
 import DistInfoList from "../dist-list";
 import TargetFileInfo from "../target-info";
 import ActionInfo from "../action-info";
+import { DistInfoInterface } from "common/interface";
 
 import './index.css';
 
-interface Dist {
-  name: string;
-  state: string;
-}
-
 const App = () => {
-  const [distInfos, setDistInfos] = useState<Array<Dist>>([]);
+  const [distInfos, setDistInfos] = useState<Array<DistInfoInterface>>([]);
 
   const path = useRef('');
 
@@ -41,6 +37,7 @@ const App = () => {
     });
 
     electron.getInitDist().then(setDistInfos);
+    // electron.getInitDist();
   }, []);
 
   return (

@@ -1,7 +1,15 @@
-export type DistState = 'unstart' | 'fail' | 'success' | 'copying';
+export enum DistStateEnmu {
+  Unstart,
+  Fail,
+  Success,
+  Copying,
+  Unexist,
+  CopyError,
+}
 
-export interface DistInfo {
+export interface DistInfoInterface {
+  [key: string]: string | boolean | DistStateEnmu;
   name: string;
   ignore: boolean;
-  state: DistState;
+  state: DistStateEnmu;
 }

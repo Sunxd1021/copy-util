@@ -1,16 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
 import Button from '../button';
+import { DistStateEnmu } from 'common/interface';
 
 import './index.css';
 
-const map: Record<string, string> = {
-  start: '复制中',
-  success: '复制完成',
-  fail: '复制失败'
+const map: Record<DistStateEnmu, string> = {
+  [DistStateEnmu.Unstart]: '未开始',
+  [DistStateEnmu.Copying]: '复制中',
+  [DistStateEnmu.Success]: '复制成功',
+  [DistStateEnmu.Fail]: '复制失败',
+  [DistStateEnmu.Unexist]: '未插入',
+  [DistStateEnmu.CopyError]: '发生错误',
 };
 
 interface PropsInterface {
-  state: string;
+  state: DistStateEnmu;
   name: string;
   ignore: boolean;
   onIgnore: (name: string) => void;
@@ -18,7 +22,7 @@ interface PropsInterface {
 
 const DistInfo = ({ name, state, ignore, onIgnore }: PropsInterface) => {
   const process = useMemo(() => {
-    return map[state] || '未开始';
+    return map[state] || '未知状态';
   }, [state]);
 
   const _onIgnore = useCallback(() => {
