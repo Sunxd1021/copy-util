@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainContainer from '../../components/container';
 import Button from '../../components/button';
-// import electron from '../../utils/electron';
+import event from '../../custom-event';
 
 import './index.css';
 
@@ -12,7 +12,18 @@ const TargetFileInfo = ({ onPathChange }: { onPathChange: (value: any) => void }
   const [modify, setModify] = useState(false);
 
   const onButtonClick = () => {
-    setModify(s => !s);
+    if (modify) {
+      if (!path) return event.toast('请输入路径'); 
+      window.electron.updateTargetPath(path).then(res => {
+        const { message, result } = res;
+        if (result) setModify(false);
+        if(message) event.toast(message);
+      }).catch(() => {
+        event.toast('设置失败');
+      })
+    } else {
+      setModify(true)
+    }
   }
 
   const onChange = (e: any) => {

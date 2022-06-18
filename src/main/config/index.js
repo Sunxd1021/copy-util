@@ -1,4 +1,4 @@
-const { writeFile } = require('fs');
+const { writeFile, existsSync } = require('fs');
 const { join } = require('path');
 
 class Config {
@@ -39,6 +39,12 @@ class Config {
       return 1;
     }
   }
+
+  updatePath = (_, path) => {
+    const result = existsSync(path);
+    if (result) this.update('targetPath', path)
+    return { message: result ? '设置成功' : '失败, 路径不存在', result };
+  }
 }
 
 const config = new Proxy(new Config, {
@@ -47,6 +53,8 @@ const config = new Proxy(new Config, {
       return target.update
     } else if (key === 'toggle') {
       return target.toggle;
+    } else if (key === 'updatePath') {
+      return target.updatePath;
     } else {
       return target.data[key];
     }

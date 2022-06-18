@@ -37,6 +37,7 @@ class CopyFileLogic {
     ipcMain.handle('copy:start', this.startCopy);
     ipcMain.handle('dist:stateChange', distInfo.onIgnoreStateChange);
     ipcMain.handle('dist:init', () => distInfo.getDistInfo());
+    ipcMain.handle('dist:target-path-change', config.updatePath);
 
     usb.on('detach', distInfo.onDistDetach);
     usb.on('attach', distInfo.onDistAttach);

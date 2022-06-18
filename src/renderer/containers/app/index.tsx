@@ -4,6 +4,7 @@ import DistInfoList from "../dist-list";
 import TargetFileInfo from "../target-info";
 import ActionInfo from "../action-info";
 import { DistInfoInterface } from "common/interface";
+import Message from "renderer/components/message";
 
 import './index.css';
 
@@ -42,6 +43,7 @@ const App = () => {
 
   return (
     <div className="app">
+      <Message />
       <DistInfoList distInfos={distInfos} />
       <div className="footer">
         <TargetFileInfo onPathChange = {onPathChange} />

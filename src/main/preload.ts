@@ -34,6 +34,7 @@ const data: S = {
     if (typeof cb !== 'function') return;
     ipcRenderer.on('copy:state-change', cb);
   },
+  updateTargetPath: (path: string) => ipcRenderer.invoke('dist:target-path-change', path)
 }
 
 contextBridge.exposeInMainWorld('electron', data);
