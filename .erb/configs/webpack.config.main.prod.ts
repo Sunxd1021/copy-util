@@ -32,7 +32,7 @@ const configuration: webpack.Configuration = {
   entry: {
     main: path.join(webpackPaths.srcMainPath, 'main.ts'),
     preload: path.join(webpackPaths.srcMainPath, 'preload.ts'),
-    copy: path.join(webpackPaths.srcMainPath, 'logics', 'copy.ts'),
+    child: path.join(webpackPaths.srcMainPath, 'logics', 'copy-logic', 'child.ts'),
   },
 
   output: {
