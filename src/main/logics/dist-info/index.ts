@@ -1,5 +1,6 @@
 import { DistStateEnmu } from '../../../common/interface';
 import Base from './base';
+import config from './../../config';
 
 class DistInfo extends Base {
   // usb 插入回调
@@ -11,6 +12,13 @@ class DistInfo extends Base {
   // 更新磁盘state状态
   updateState = (name: string, state: DistStateEnmu) => {
     this.updateDistInfo(name, 'state', state);
+  }
+
+  onIgnoreStateChange = (_: any, name: string) => {
+    const result = config.toggle(name);
+    config.update();
+    console.log(name, result === 1);
+    this.updateDistInfo(name, 'ignore', result === 1)
   }
 }
 

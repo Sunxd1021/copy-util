@@ -233,7 +233,7 @@
     "patterns": [
       "!**/**",
       "src/main/*",
-      "src/main/logics/*"
+      "src/main/logics/**"
     ],
     "logLevel": "quiet"
   }

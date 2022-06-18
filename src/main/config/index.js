@@ -28,12 +28,25 @@ class Config {
       }
     });
   }
+
+  toggle = (name) => {
+    const { ignoreDist } = this.data;
+    if (ignoreDist.includes(name)) {
+      this.data.ignoreDist = ignoreDist.filter(ele => ele !== name);
+      return -1;
+    } else {
+      ignoreDist.push(name);
+      return 1;
+    }
+  }
 }
 
 const config = new Proxy(new Config, {
   get(target, key) {
     if (key === 'update') {
       return target.update
+    } else if (key === 'toggle') {
+      return target.toggle;
     } else {
       return target.data[key];
     }

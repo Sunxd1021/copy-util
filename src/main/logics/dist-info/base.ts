@@ -5,7 +5,7 @@ import { computeDistName, isDistExist } from './uitls';
 import messageToWeb from './../../message-to-web';
 
 class BaseDist {
-  private distInfo: DistInfoInterface[];
+  protected distInfo: DistInfoInterface[];
 
   constructor() {
     this.distInfo = [];

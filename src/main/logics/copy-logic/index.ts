@@ -35,15 +35,11 @@ class CopyFileLogic {
 
   init = () => {
     ipcMain.handle('copy:start', this.startCopy);
-    ipcMain.handle('dist:stateChange', this.ignoreStateChange);
+    ipcMain.handle('dist:stateChange', distInfo.onIgnoreStateChange);
     ipcMain.handle('dist:init', () => distInfo.getDistInfo());
 
     usb.on('detach', distInfo.onDistDetach);
     usb.on('attach', distInfo.onDistAttach);
-  }
-
-  ignoreStateChange = () => {
-
   }
 
   startCopy = () => {
