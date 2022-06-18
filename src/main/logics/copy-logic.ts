@@ -1,6 +1,6 @@
 import { ipcMain, IpcMainInvokeEvent } from "electron";
 import { existsSync } from 'fs-extra';
-import { fork } from "child_process";
+import { fork, ChildProcess } from "child_process";
 import config from "../config";
 import { resolve } from "path";
 import customEvent from '../event';
@@ -8,7 +8,12 @@ import { getExistDist } from './dist-change-logic';
 import messageToWeb from '../message-to-web';
 import { cpus } from 'os';
 
-let childs: any[] = [];
+
+interface CustomChildProcess extends ChildProcess {
+  __end__?: boolean;
+}
+
+let childs: CustomChildProcess[] = [];
 
 let dists: any[] = [];
 
@@ -71,7 +76,7 @@ function startCopy(path: any, dist: any) {
   emit({ type: 'start', dist });
 
   const { childPath, childOptions } = getChildOptions();
-  const child: any = fork(childPath, [path, `${dist}:\/`], childOptions);
+  const child: CustomChildProcess = fork(childPath, [path, `${dist}:\/`], childOptions);
   child.on('message', ({ action }: { action: any }) => {
     if (action === 'success') {
       emit({ type: 'success', dist });
