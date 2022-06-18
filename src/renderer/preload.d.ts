@@ -20,7 +20,7 @@ declare global {
         once(channel: string, func: (...args: unknown[]) => void): void;
       };
       getTargetPath: () => string;
-      startCopy: (path: string) => void;
+      startCopy: ParamsPromiseInterface;
       toggleDistState: (distName: string) => void;
       onDistChange: (fn: (event: any, data: any) => void) => void;
       onCopyStateChange: (fn: (event: any, data: any) => void) => void;

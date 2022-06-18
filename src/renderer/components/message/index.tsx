@@ -4,7 +4,7 @@ import './index.css';
 import Button from "../button";
 
 const Message = () => {
-  const [msg, setMsg] = useState('路经促我');
+  const [msg, setMsg] = useState('');
 
   useEffect(() => {
     event.on('toast', (msg) => {

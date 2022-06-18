@@ -1,8 +1,4 @@
 {
-  "targetPath": "C:\\Users\\hwmxy\\Desktop\\chrome",
-  "ignoreDist": [
-    "K",
-    "G",
-    "S"
-  ]
+  "targetPath": "",
+  "ignoreDist": []
 }

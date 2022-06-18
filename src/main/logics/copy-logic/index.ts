@@ -6,6 +6,7 @@ import distInfo from "../dist-info";
 import { DistStateEnmu, DistInfoInterface } from '../../../common/interface';
 import { ChildProcessPath, ChildProcessOption } from "./options";
 import { usb } from 'usb';
+import { existsSync } from 'fs-extra'
 
 interface CustomChildProcess extends ChildProcess {
   __end__?: boolean;
@@ -43,9 +44,10 @@ class CopyFileLogic {
     usb.on('attach', distInfo.onDistAttach);
   }
 
-  startCopy = () => {
-    if (this.copying) return;
-    if(!config.targetPath) return;
+  startCopy = (): any => {
+    if (this.copying) return { message: '正在拷贝中' };
+    if(!config.targetPath) return { message: '目标路径不存在' };
+    if (!existsSync(config.targetPath)) return { message: '目标路径不存在' };
 
     this.startMainProcess();
   }

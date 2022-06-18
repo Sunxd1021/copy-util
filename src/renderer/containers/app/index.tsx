@@ -5,6 +5,7 @@ import TargetFileInfo from "../target-info";
 import ActionInfo from "../action-info";
 import { DistInfoInterface } from "common/interface";
 import Message from "renderer/components/message";
+import event from '../../custom-event';
 
 import './index.css';
 
@@ -14,7 +15,9 @@ const App = () => {
   const path = useRef('');
 
   const onStartopy = () => {
-    window.electron.startCopy(path.current);
+    window.electron.startCopy(path.current).then((data: any) => {
+      if (data.message) event.toast(data.message);
+    })
   }
 
   const onPathChange = (_path: string) => {
