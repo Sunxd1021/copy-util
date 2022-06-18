@@ -1,7 +1,7 @@
-const { usb } = require('usb');
-const { existsSync } = require('fs');
+import { usb } from 'usb';
+import { existsSync } from 'fs-extra';
 import event from "../event";
-const { ipcMain } = require('electron');
+import { ipcMain } from 'electron';
 import config from "../config";
 import messageToWeb from "../message-to-web";
 // u盘插拔事件
